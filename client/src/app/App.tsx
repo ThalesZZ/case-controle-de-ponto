@@ -14,7 +14,7 @@ const App = () => {
       <ThemeProvider theme={DefaultTheme}>
         {!loggedUser
           ? <LoginForm setLoggedUser={setLoggedUser} />
-          : <DayWorksView user={loggedUser} />}
+          : <DayWorksView user={loggedUser} setUser={setLoggedUser} />}
       </ThemeProvider>
     </div>
   );

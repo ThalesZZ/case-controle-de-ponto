@@ -8,13 +8,13 @@ import { getFormattedTimer } from "../../utils";
 
 interface CurrentWorklogProps {
     currentDaywork: DayWork
+    startShift: () => void
 }
 
 const refreshIntervalMs = 10000
 
-export function CurrentWorklog({ currentDaywork }: CurrentWorklogProps): React.ReactElement {
+export function CurrentWorklog({ currentDaywork, startShift }: CurrentWorklogProps): React.ReactElement {
     const dayworkStarted = !!currentDaywork?.checkin
-    const dayworkInProgress = dayworkStarted && !currentDaywork.checkout
 
     const [workTimer, setWorkTimer] = React.useState<string>('')
 
@@ -38,7 +38,7 @@ export function CurrentWorklog({ currentDaywork }: CurrentWorklogProps): React.R
             </div>
 
             {!dayworkStarted ? (
-                <button>Iniciar turno</button>
+                <button onClick={startShift}>Iniciar turno</button>
             ) : (
                 <button>Finalizar turno</button>
             )}

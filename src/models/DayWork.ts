@@ -1,7 +1,7 @@
 export type EntryType = 'checkin' | 'checkout'
 
 export interface DayWork {
-    id: number
+    id: string
     checkin: Date
-    checkout: Date
+    checkout?: Date
 }

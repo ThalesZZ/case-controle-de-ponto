@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from 'styled-components';
 import { DayWork, EntryType } from "../../../../src/models/DayWork";
 import { User } from "../../../../src/models/User";
+import { API } from "../../api/api";
 import { ActionButton } from "../../components/ActionButton";
 import { useToggle } from "../../hooks/useToggle";
 import { CurrentWorklog } from "./CurrentWorklog";
@@ -9,13 +10,19 @@ import { History } from "./History";
 
 interface DayWorksViewProps {
     user: User
+    setUser: React.Dispatch<React.SetStateAction<User>>
 }
 
-export function DayWorksView({ user }: DayWorksViewProps): React.ReactElement {
-    const [currentDaywork, setCurrentDaywork] = React.useState<DayWork>()
+export function DayWorksView({ user, setUser }: DayWorksViewProps): React.ReactElement {
 
     const entryTypeToggler = useToggle(true)
     const entryType: EntryType = React.useMemo(() => entryTypeToggler.active ? 'checkin' : 'checkout', [entryTypeToggler.active])
+
+    function startShift(): void {
+        API.startShift(user.id).then(setUser)
+    }
+
+    const currentDaywork: DayWork = React.useMemo(() => user.dayWorks.find(daywork => !daywork.checkout), [user])
 
     return (
         <Container>
@@ -27,7 +34,7 @@ export function DayWorksView({ user }: DayWorksViewProps): React.ReactElement {
                 </div>
             </header>
 
-            <CurrentWorklog currentDaywork={currentDaywork} />
+            <CurrentWorklog currentDaywork={currentDaywork} startShift={startShift} />
 
             <ActionButton
                 text={`Hora de ${entryType === 'checkin' ? 'entrada' : 'saída'}`}

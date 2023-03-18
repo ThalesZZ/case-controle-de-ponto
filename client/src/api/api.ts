@@ -13,5 +13,16 @@ export const API = {
             return res.json();
         else
             throw res;
+    },
+    async startShift(userId: string): Promise<User> {
+        const res = await fetch(path('start'), {
+            method: 'POST',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ userId })
+        });
+        if (res.status === 200)
+            return res.json();
+        else
+            throw res;
     }
 }

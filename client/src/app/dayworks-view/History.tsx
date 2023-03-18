@@ -13,7 +13,9 @@ export function History({ dayworks, entryType }: HistoryProps): React.ReactEleme
         <Container>
             <label>Dias anteriores</label>
             <div id="entries">
-                {dayworks.map(daywork => {
+                {dayworks
+                .filter(daywork => !!daywork.checkin && !!daywork.checkout)
+                .map(daywork => {
                     const [formattedDate, formattedTime] = getFormattedDateTime(daywork[entryType])
 
                     return (
