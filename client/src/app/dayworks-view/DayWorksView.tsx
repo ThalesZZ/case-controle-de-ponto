@@ -30,7 +30,7 @@ export function DayWorksView({ user }: WorkLogProps): React.ReactElement {
                 onClick={entryTypeToggler.toggle}
             />
             
-            <History dayworks={user.dayWorks} entryType={entryType} />
+            <History entryType={entryType} dayworks={user.dayWorks} />
         </Container>
     )
 }
