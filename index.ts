@@ -17,7 +17,7 @@ app.get('/', (req: Request, res: Response) => {
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Running server on port ${port}`)
 });
 
 
@@ -55,5 +55,9 @@ app.post('/login', (req: Request, res: Response) => {
   }
 
   return res.status(200).json(user)
+});
+
+app.get('/users', (req, res) => {
+  return res.status(200).json(users)
 });
 
