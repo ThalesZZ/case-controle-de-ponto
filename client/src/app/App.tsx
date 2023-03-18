@@ -1,8 +1,10 @@
+import { ThemeProvider } from 'styled-components';
 import { TextInput } from "../components/text-input";
+import DefaultTheme from '../theme/default';
 
 const App = () => {
 
-  
+
 
   // React.useEffect(() => {
   //   fetch('http://localhost:8000/login', {
@@ -18,9 +20,9 @@ const App = () => {
   // }, [])
 
   return (
-    <div style={{border: '1px solid red'}}>
+    <ThemeProvider theme={DefaultTheme}>
       <TextInput />
-    </div>
+    </ThemeProvider>
   );
 };
 
