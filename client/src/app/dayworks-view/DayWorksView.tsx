@@ -14,15 +14,18 @@ interface DayWorksViewProps {
 }
 
 export function DayWorksView({ user, setUser }: DayWorksViewProps): React.ReactElement {
-
     const entryTypeToggler = useToggle(true)
     const entryType: EntryType = React.useMemo(() => entryTypeToggler.active ? 'checkin' : 'checkout', [entryTypeToggler.active])
+    
+    const currentDaywork: DayWork = React.useMemo(() => user.dayWorks.find(daywork => !daywork.checkout), [user])
 
     function startShift(): void {
         API.startShift(user.id).then(setUser)
     }
 
-    const currentDaywork: DayWork = React.useMemo(() => user.dayWorks.find(daywork => !daywork.checkout), [user])
+    function stopShift(): void {
+        API.stopShift(user.id, currentDaywork.id).then(setUser)
+    }
 
     return (
         <Container>
@@ -34,7 +37,7 @@ export function DayWorksView({ user, setUser }: DayWorksViewProps): React.ReactE
                 </div>
             </header>
 
-            <CurrentWorklog currentDaywork={currentDaywork} startShift={startShift} />
+            <CurrentWorklog currentDaywork={currentDaywork} startShift={startShift} stopShift={stopShift} />
 
             <ActionButton
                 text={`Hora de ${entryType === 'checkin' ? 'entrada' : 'saída'}`}
