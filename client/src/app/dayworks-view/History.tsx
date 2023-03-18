@@ -1,9 +1,7 @@
-import moment from 'moment'
 import React from "react"
 import styled, { css } from 'styled-components'
 import { DayWork, EntryType } from "../../../../src/models/DayWork"
-
-const padTimeValue = (value: number): string => value.toString().padStart(2, '0')
+import { getFormattedDateTime } from '../../utils'
 
 interface HistoryProps {
     dayworks: Array<DayWork>
@@ -16,15 +14,12 @@ export function History({ dayworks, entryType }: HistoryProps): React.ReactEleme
             <label>Dias anteriores</label>
             <div id="entries">
                 {dayworks.map(daywork => {
-                    const dateTime = moment(daywork[entryType])
-                    const date = dateTime.format('DD/MM/YY')
-                    const hours = padTimeValue(dateTime.hour())
-                    const minutes = padTimeValue(dateTime.minute())
+                    const { formattedDate, formattedTime } = getFormattedDateTime(daywork[entryType])
 
                     return (
                         <div key={daywork.id} className="entry">
-                            <span>{date}</span>
-                            <span>{`${hours}h ${minutes}m`}</span>
+                            <span>{formattedDate}</span>
+                            <span>{formattedTime}</span>
                         </div>
                     )
                 })}

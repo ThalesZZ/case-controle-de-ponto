@@ -4,13 +4,14 @@ import { EntryType } from "../../../../src/models/DayWork";
 import { User } from "../../../../src/models/User";
 import { ActionButton } from "../../components/ActionButton";
 import { useToggle } from "../../hooks/useToggle";
+import { CurrentWorklog } from "./CurrentWorklog";
 import { History } from "./History";
 
-interface WorkLogProps {
+interface DayWorksViewProps {
     user: User
 }
 
-export function DayWorksView({ user }: WorkLogProps): React.ReactElement {
+export function DayWorksView({ user }: DayWorksViewProps): React.ReactElement {
     const entryTypeToggler = useToggle(true)
 
     const entryType: EntryType = React.useMemo(() => entryTypeToggler.active ? 'checkin' : 'checkout', [entryTypeToggler.active])
@@ -24,6 +25,8 @@ export function DayWorksView({ user }: WorkLogProps): React.ReactElement {
                     <span>Usuário</span>
                 </div>
             </header>
+
+            <CurrentWorklog />
 
             <ActionButton
                 text={`Hora de ${entryType === 'checkin' ? 'entrada' : 'saída'}`}
