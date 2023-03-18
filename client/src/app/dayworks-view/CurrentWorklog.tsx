@@ -1,13 +1,30 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import moment from "moment";
 import React from "react";
 import styled from 'styled-components';
-import { getFormattedDateTime } from "../../utils";
+import { DayWork } from "../../../../src/models/DayWork";
+import { useToggle } from "../../hooks/useToggle";
+import { getFormattedTimer } from "../../utils";
 
-export function CurrentWorklog(): React.ReactElement {
-    const currentTime = React.useMemo(() =>{
-        const time = getFormattedDateTime(new Date()).formattedTime
+interface CurrentWorklogProps {
+    currentDaywork: DayWork
+}
 
-        return time
-    }, [])
+export function CurrentWorklog({ currentDaywork }: CurrentWorklogProps): React.ReactElement {
+    const updateTimerFlag = useToggle()
+    React.useEffect(() => {
+        const timer = setTimeout(updateTimerFlag.toggle, 10000)
+        return () => clearTimeout(timer)
+    }, [updateTimerFlag.active])
+
+    const currentTime = React.useMemo(() => {
+        const now = moment(new Date())
+        const minutesSinceCheckin = now.diff(currentDaywork.checkin, 'minutes')
+        const hours = Math.floor(minutesSinceCheckin / 60)
+        const minutes = minutesSinceCheckin % 60
+
+        return getFormattedTimer(hours, minutes)
+    }, [updateTimerFlag.active, currentDaywork.checkin])
 
     return (
         <Container>

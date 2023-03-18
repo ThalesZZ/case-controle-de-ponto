@@ -13,7 +13,6 @@ interface DayWorksViewProps {
 
 export function DayWorksView({ user }: DayWorksViewProps): React.ReactElement {
     const entryTypeToggler = useToggle(true)
-
     const entryType: EntryType = React.useMemo(() => entryTypeToggler.active ? 'checkin' : 'checkout', [entryTypeToggler.active])
 
     return (
@@ -26,13 +25,13 @@ export function DayWorksView({ user }: DayWorksViewProps): React.ReactElement {
                 </div>
             </header>
 
-            <CurrentWorklog />
+            <CurrentWorklog currentDaywork={{ id: 0, checkin: new Date(1679151600000), checkout: null }} />
 
             <ActionButton
                 text={`Hora de ${entryType === 'checkin' ? 'entrada' : 'saída'}`}
                 onClick={entryTypeToggler.toggle}
             />
-            
+
             <History entryType={entryType} dayworks={user.dayWorks} />
         </Container>
     )

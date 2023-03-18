@@ -14,7 +14,7 @@ export function History({ dayworks, entryType }: HistoryProps): React.ReactEleme
             <label>Dias anteriores</label>
             <div id="entries">
                 {dayworks.map(daywork => {
-                    const { formattedDate, formattedTime } = getFormattedDateTime(daywork[entryType])
+                    const [formattedDate, formattedTime] = getFormattedDateTime(daywork[entryType])
 
                     return (
                         <div key={daywork.id} className="entry">
