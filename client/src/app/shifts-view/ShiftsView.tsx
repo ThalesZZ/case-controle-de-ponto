@@ -1,30 +1,30 @@
 import React from "react";
 import styled, { css } from 'styled-components';
-import { DayWork, EntryType } from "../../../../src/models/DayWork";
+import { EntryType, Shift } from "../../../../src/models/Shift";
 import { User } from "../../../../src/models/User";
 import { API } from "../../api/api";
 import { ActionButton } from "../../components/ActionButton";
 import { useToggle } from "../../hooks/useToggle";
-import { CurrentWorklog } from "./CurrentWorklog";
-import { History } from "./History";
+import { CurrentShiftView } from "./CurrentShiftView";
+import { HistoryView } from "./HistoryView";
 
-interface DayWorksViewProps {
+interface ShiftsViewProps {
     user: User
     setUser: React.Dispatch<React.SetStateAction<User>>
 }
 
-export function DayWorksView({ user, setUser }: DayWorksViewProps): React.ReactElement {
+export function ShiftsView({ user, setUser }: ShiftsViewProps): React.ReactElement {
     const entryTypeToggler = useToggle(true)
     const entryType: EntryType = React.useMemo(() => entryTypeToggler.active ? 'checkin' : 'checkout', [entryTypeToggler.active])
     
-    const currentDaywork: DayWork = React.useMemo(() => user.dayWorks.find(daywork => !daywork.checkout), [user])
+    const currentShift: Shift = React.useMemo(() => user.shifts.find(shift => !shift.checkout), [user])
 
     function startShift(): void {
         API.startShift(user.id).then(setUser)
     }
 
     function stopShift(): void {
-        API.stopShift(user.id, currentDaywork.id).then(setUser)
+        API.stopShift(user.id, currentShift.id).then(setUser)
     }
 
     return (
@@ -37,14 +37,14 @@ export function DayWorksView({ user, setUser }: DayWorksViewProps): React.ReactE
                 </div>
             </header>
 
-            <CurrentWorklog currentDaywork={currentDaywork} startShift={startShift} stopShift={stopShift} />
+            <CurrentShiftView currentShift={currentShift} startShift={startShift} stopShift={stopShift} />
 
             <ActionButton
                 text={`Hora de ${entryType === 'checkin' ? 'entrada' : 'saída'}`}
                 onClick={entryTypeToggler.toggle}
             />
 
-            <History entryType={entryType} dayworks={user.dayWorks} />
+            <HistoryView entryType={entryType} shifts={user.shifts} />
         </Container>
     )
 }

@@ -1,25 +1,25 @@
 import React from "react"
 import styled, { css } from 'styled-components'
-import { DayWork, EntryType } from "../../../../src/models/DayWork"
+import { EntryType, Shift } from "../../../../src/models/Shift"
 import { getFormattedDateTime } from '../../utils'
 
 interface HistoryProps {
-    dayworks: Array<DayWork>
+    shifts: Array<Shift>
     entryType: EntryType
 }
 
-export function History({ dayworks, entryType }: HistoryProps): React.ReactElement {
+export function HistoryView({ shifts, entryType }: HistoryProps): React.ReactElement {
     return (
         <Container>
             <label>Dias anteriores</label>
             <div id="entries">
-                {dayworks
-                .filter(daywork => !!daywork.checkin && !!daywork.checkout)
-                .map(daywork => {
-                    const [formattedDate, formattedTime] = getFormattedDateTime(daywork[entryType])
+                {shifts
+                .filter(shift => !!shift.checkin && !!shift.checkout)
+                .map(shift => {
+                    const [formattedDate, formattedTime] = getFormattedDateTime(shift[entryType])
 
                     return (
-                        <div key={daywork.id} className="entry">
+                        <div key={shift.id} className="entry">
                             <span>{formattedDate}</span>
                             <span>{formattedTime}</span>
                         </div>

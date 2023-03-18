@@ -1,7 +1,7 @@
-import { DayWork } from "./DayWork";
+import { Shift } from './Shift';
 
 export interface User {
 	id: string;
 	authCod: string;
-	dayWorks: Array<DayWork>;
+	shifts: Array<Shift>;
 }

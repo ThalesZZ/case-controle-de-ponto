@@ -2,43 +2,43 @@
 import moment from "moment";
 import React from "react";
 import styled, { css } from 'styled-components';
-import { DayWork } from "../../../../src/models/DayWork";
+import { Shift } from "../../../../src/models/Shift";
 import { useContinuous } from "../../hooks/useContinuous";
 import { getFormattedTimer } from "../../utils";
 
-interface CurrentWorklogProps {
-    currentDaywork: DayWork
+interface CurrentShiftViewProps {
+    currentShift: Shift
     startShift: () => void
     stopShift: () => void
 }
 
 const refreshIntervalMs = 10000
 
-export function CurrentWorklog({ currentDaywork, startShift, stopShift }: CurrentWorklogProps): React.ReactElement {
-    const dayworkStarted = !!currentDaywork?.checkin
+export function CurrentShiftView({ currentShift, startShift, stopShift }: CurrentShiftViewProps): React.ReactElement {
+    const shiftStarted = !!currentShift?.checkin
 
-    const [workTimer, setWorkTimer] = React.useState<string>('')
+    const [shiftTimer, setShiftTimer] = React.useState<string>('')
 
     useContinuous(refreshIntervalMs, () => {
-        if (!currentDaywork)
-            return setWorkTimer(getFormattedTimer(0, 0))
+        if (!currentShift)
+            return setShiftTimer(getFormattedTimer(0, 0))
 
         const now = moment(new Date())
-        const minutesSinceCheckin = now.diff(currentDaywork.checkin, 'minutes')
+        const minutesSinceCheckin = now.diff(currentShift.checkin, 'minutes')
         const hours = Math.floor(minutesSinceCheckin / 60)
         const minutes = minutesSinceCheckin % 60
 
-        setWorkTimer(getFormattedTimer(hours, minutes))
-    }, [currentDaywork])
+        setShiftTimer(getFormattedTimer(hours, minutes))
+    }, [currentShift])
 
     return (
-        <Container dayWorkStarted={dayworkStarted}>
+        <Container shiftStarted={shiftStarted}>
             <div id="timer">
-                <span>{workTimer}</span>
+                <span>{shiftTimer}</span>
                 <label>Horas de hoje</label>
             </div>
 
-            {!dayworkStarted ? (
+            {!shiftStarted ? (
                 <button onClick={startShift}>Iniciar turno</button>
             ) : (
                 <button onClick={stopShift}>Finalizar turno</button>
@@ -47,14 +47,14 @@ export function CurrentWorklog({ currentDaywork, startShift, stopShift }: Curren
     )
 }
 
-const Container = styled.div<{dayWorkStarted: boolean}>`
-    ${({theme, dayWorkStarted}) => css`
+const Container = styled.div<{shiftStarted: boolean}>`
+    ${({theme, shiftStarted}) => css`
         justify-content: space-between;
 
         > button {
             border: none;
             border-radius: ${theme.boxRadius}px;
-            background-color: ${dayWorkStarted ? theme.danger : theme.success};
+            background-color: ${shiftStarted ? theme.danger : theme.success};
             padding: 0.5em 1em;
             font-weight: 700;
             font-size: 0.8em;
@@ -62,7 +62,7 @@ const Container = styled.div<{dayWorkStarted: boolean}>`
             cursor: pointer;
 
             :hover {
-                background-color: ${dayWorkStarted ? theme.dangerLight : theme.successLight};
+                background-color: ${shiftStarted ? theme.dangerLight : theme.successLight};
             }
         }
 

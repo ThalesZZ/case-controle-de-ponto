@@ -1,6 +1,6 @@
 export type EntryType = 'checkin' | 'checkout'
 
-export interface DayWork {
+export interface Shift {
     id: string
     checkin: Date
     checkout?: Date

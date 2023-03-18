@@ -1,6 +1,6 @@
 import cors from "cors";
 import express from "express";
-import DayWorkController from './src/controllers/DayWorkController';
+import ShiftController from './src/controllers/ShiftController';
 import UserController from './src/controllers/UserController';
 
 const port = 8000;
@@ -19,4 +19,4 @@ app.listen(port, () => {
 });
 
 UserController.init(app);
-DayWorkController.init(app);
+ShiftController.init(app);
