@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from 'styled-components';
-import { EntryType } from "../../../../src/models/DayWork";
+import { DayWork, EntryType } from "../../../../src/models/DayWork";
 import { User } from "../../../../src/models/User";
 import { ActionButton } from "../../components/ActionButton";
 import { useToggle } from "../../hooks/useToggle";
@@ -12,6 +12,8 @@ interface DayWorksViewProps {
 }
 
 export function DayWorksView({ user }: DayWorksViewProps): React.ReactElement {
+    const [currentDaywork, setCurrentDaywork] = React.useState<DayWork>()
+
     const entryTypeToggler = useToggle(true)
     const entryType: EntryType = React.useMemo(() => entryTypeToggler.active ? 'checkin' : 'checkout', [entryTypeToggler.active])
 
@@ -25,7 +27,7 @@ export function DayWorksView({ user }: DayWorksViewProps): React.ReactElement {
                 </div>
             </header>
 
-            <CurrentWorklog currentDaywork={{ id: 0, checkin: new Date(1679151600000), checkout: null }} />
+            <CurrentWorklog currentDaywork={currentDaywork} />
 
             <ActionButton
                 text={`Hora de ${entryType === 'checkin' ? 'entrada' : 'saída'}`}
