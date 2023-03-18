@@ -1,6 +1,9 @@
 import React from "react";
 import styled, { css } from 'styled-components';
+import { EntryType } from "../../../../src/models/DayWork";
 import { User } from "../../../../src/models/User";
+import { ActionButton } from "../../components/ActionButton";
+import { useToggle } from "../../hooks/useToggle";
 import { History } from "./History";
 
 interface WorkLogProps {
@@ -8,6 +11,9 @@ interface WorkLogProps {
 }
 
 export function DayWorksView({ user }: WorkLogProps): React.ReactElement {
+    const entryTypeToggler = useToggle(true)
+
+    const entryType: EntryType = React.useMemo(() => entryTypeToggler.active ? 'checkin' : 'checkout', [entryTypeToggler.active])
 
     return (
         <Container>
@@ -18,17 +24,23 @@ export function DayWorksView({ user }: WorkLogProps): React.ReactElement {
                     <span>Usuário</span>
                 </div>
             </header>
-            <History dayworks={user.dayWorks} />
+
+            <ActionButton
+                text={`Hora de ${entryType === 'checkin' ? 'entrada' : 'saída'}`}
+                onClick={entryTypeToggler.toggle}
+            />
+            
+            <History dayworks={user.dayWorks} entryType={entryType} />
         </Container>
     )
 }
 
 const Container = styled.div`
-    ${({theme}) => css`
-        width: 30%;
+    ${({ theme }) => css`
+        width: 28%;
         height: 85%;
         flex-flow: column;
-        border: 1px solid red;
+        gap: 1.5em;
 
         > header {
             display: flex;

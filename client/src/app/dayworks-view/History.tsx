@@ -1,17 +1,16 @@
 import moment from 'moment'
 import React from "react"
 import styled, { css } from 'styled-components'
-import { DayWork } from "../../../../src/models/DayWork"
+import { DayWork, EntryType } from "../../../../src/models/DayWork"
 
 const padTimeValue = (value: number): string => value.toString().padStart(2, '0')
 
 interface HistoryProps {
     dayworks: Array<DayWork>
+    entryType: EntryType
 }
 
-export function History({ dayworks }: HistoryProps): React.ReactElement {
-    const entryType: 'checkin' | 'checkout' = 'checkin'
-
+export function History({ dayworks, entryType }: HistoryProps): React.ReactElement {
     return (
         <Container>
             <label>Dias anteriores</label>
@@ -50,6 +49,7 @@ const Container = styled.div`
                 padding: 1em;
                 padding-right: 1.5em;
                 background-color: ${theme.auxiliar};
+                border-radius: ${theme.boxRadius}px;
 
                 span:first-child {
                     color: ${theme.auxiliarTextColor};
