@@ -1,10 +1,20 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { User } from '../../../../src/models/User';
+import { API } from '../../api/api';
 import { ActionButton } from '../../components/ActionButton';
 import { TextInput } from "../../components/TextInput";
 
-export function LoginForm(): React.ReactElement {
+interface LoginFormProps {
+    setLoggedUser: React.Dispatch<React.SetStateAction<User>>
+}
+
+export function LoginForm({setLoggedUser}: LoginFormProps): React.ReactElement {
     const [authCod, setAuthCod] = React.useState<string>('')
+
+    function login(): void {
+        API.login(authCod).then(setLoggedUser)
+    }
 
     return (
         <Container>
@@ -12,7 +22,7 @@ export function LoginForm(): React.ReactElement {
                 Ponto <span>Ilumeo</span>
             </div>
             <TextInput value={authCod} setValue={setAuthCod} />
-            <ActionButton text="Confirmar" onClick={undefined} />
+            <ActionButton text="Confirmar" onClick={login} />
         </Container>
     )
 }
