@@ -3,32 +3,30 @@ import moment from "moment";
 import React from "react";
 import styled from 'styled-components';
 import { DayWork } from "../../../../src/models/DayWork";
-import { useToggle } from "../../hooks/useToggle";
+import { useContinuous } from "../../hooks/useContinuous";
 import { getFormattedTimer } from "../../utils";
 
 interface CurrentWorklogProps {
     currentDaywork: DayWork
 }
 
-export function CurrentWorklog({ currentDaywork }: CurrentWorklogProps): React.ReactElement {
-    const updateTimerFlag = useToggle()
-    React.useEffect(() => {
-        const timer = setTimeout(updateTimerFlag.toggle, 10000)
-        return () => clearTimeout(timer)
-    }, [updateTimerFlag.active])
+const refreshIntervalMs = 10000
 
-    const currentTime = React.useMemo(() => {
+export function CurrentWorklog({ currentDaywork }: CurrentWorklogProps): React.ReactElement {
+    const [workTimer, setWorkTimer] = React.useState<string>('')
+
+    useContinuous(refreshIntervalMs, () => {
         const now = moment(new Date())
         const minutesSinceCheckin = now.diff(currentDaywork.checkin, 'minutes')
         const hours = Math.floor(minutesSinceCheckin / 60)
         const minutes = minutesSinceCheckin % 60
 
-        return getFormattedTimer(hours, minutes)
-    }, [updateTimerFlag.active, currentDaywork.checkin])
+        setWorkTimer(getFormattedTimer(hours, minutes))
+    }, [currentDaywork])
 
     return (
         <Container>
-            <span>{currentTime}</span>
+            <span>{workTimer}</span>
             <label>Horas de hoje</label>
         </Container>
     )
