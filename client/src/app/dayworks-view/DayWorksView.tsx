@@ -1,21 +1,24 @@
 import React from "react";
 import styled, { css } from 'styled-components';
 import { User } from "../../../../src/models/User";
+import { History } from "./History";
 
 interface WorkLogProps {
     user: User
 }
 
 export function DayWorksView({ user }: WorkLogProps): React.ReactElement {
+
     return (
         <Container>
             <header>
-                <span>Relógio de ponto</span>
+                <label>Relógio de ponto</label>
                 <div>
-                    <span>#{user.authCod}</span>
+                    <label>#{user.authCod}</label>
                     <span>Usuário</span>
                 </div>
             </header>
+            <History dayworks={user.dayWorks} />
         </Container>
     )
 }
@@ -24,17 +27,13 @@ const Container = styled.div`
     ${({theme}) => css`
         width: 30%;
         height: 85%;
+        flex-flow: column;
         border: 1px solid red;
 
         > header {
             display: flex;
             width: 100%;
             justify-content: space-between;
-
-            span {
-                font-weight: 700;
-                font-size: 0.8em;
-            }
 
             > div {
                 flex-flow: column;
@@ -43,6 +42,7 @@ const Container = styled.div`
                 span:last-child {
                     color: ${theme.auxiliarTextColor};
                     font-weight: 300;
+                    font-size: 0.8em;
                 }
             }
         }

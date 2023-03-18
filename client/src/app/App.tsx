@@ -2,8 +2,8 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { User } from '../../../src/models/User';
 import DefaultTheme from '../theme/default';
+import { DayWorksView } from './dayworks-view/DayWorksView';
 import { LoginForm } from './login-form/LoginForm';
-import { DayWorksView } from './work-log/DayWorksView';
 
 const App = () => {
 
