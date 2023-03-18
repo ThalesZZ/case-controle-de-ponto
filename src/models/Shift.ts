@@ -1,7 +1,7 @@
-export type EntryType = 'checkin' | 'checkout'
+export type EntryType = "checkin" | "checkout";
 
 export interface Shift {
-    id: string
-    checkin: Date
-    checkout?: Date
+	id: string;
+	checkin: Date;
+	checkout?: Date;
 }

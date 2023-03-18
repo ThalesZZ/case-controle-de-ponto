@@ -6,7 +6,7 @@ interface TextInputProps {
     setValue: React.Dispatch<React.SetStateAction<string>>
 }
 
-export function TextInput({value, setValue}: TextInputProps): React.ReactElement {
+export function TextInput({ value, setValue }: TextInputProps): React.ReactElement {
     return (
         <Container className="text-input" label="Código do usuário">
             <StyledInput value={value} onChange={e => setValue(e.target.value)} />

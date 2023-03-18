@@ -1,7 +1,7 @@
 import cors from "cors";
 import express from "express";
-import ShiftController from './src/controllers/ShiftController';
-import UserController from './src/controllers/UserController';
+import ShiftController from "./src/controllers/ShiftController";
+import UserController from "./src/controllers/UserController";
 
 const port = 8000;
 

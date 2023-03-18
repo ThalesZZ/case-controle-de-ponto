@@ -47,8 +47,8 @@ export function CurrentShiftView({ currentShift, startShift, stopShift }: Curren
     )
 }
 
-const Container = styled.div<{shiftStarted: boolean}>`
-    ${({theme, shiftStarted}) => css`
+const Container = styled.div<{ shiftStarted: boolean }>`
+    ${({ theme, shiftStarted }) => css`
         justify-content: space-between;
 
         > button {

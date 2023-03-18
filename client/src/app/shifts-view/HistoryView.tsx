@@ -14,17 +14,17 @@ export function HistoryView({ shifts, entryType }: HistoryProps): React.ReactEle
             <label>Dias anteriores</label>
             <div id="entries">
                 {shifts
-                .filter(shift => !!shift.checkin && !!shift.checkout)
-                .map(shift => {
-                    const [formattedDate, formattedTime] = getFormattedDateTime(shift[entryType])
+                    .filter(shift => !!shift.checkin && !!shift.checkout)
+                    .map(shift => {
+                        const [formattedDate, formattedTime] = getFormattedDateTime(shift[entryType])
 
-                    return (
-                        <div key={shift.id} className="entry">
-                            <span>{formattedDate}</span>
-                            <span>{formattedTime}</span>
-                        </div>
-                    )
-                })}
+                        return (
+                            <div key={shift.id} className="entry">
+                                <span>{formattedDate}</span>
+                                <span>{formattedTime}</span>
+                            </div>
+                        )
+                    })}
             </div>
         </Container>
     )

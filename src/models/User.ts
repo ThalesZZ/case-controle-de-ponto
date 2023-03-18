@@ -1,4 +1,4 @@
-import { Shift } from './Shift';
+import { Shift } from "./Shift";
 
 export interface User {
 	id: string;

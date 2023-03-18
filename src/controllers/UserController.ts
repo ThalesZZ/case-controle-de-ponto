@@ -1,5 +1,5 @@
 import { Express } from "express";
-import users from '../persistence/users';
+import users from "../persistence/users";
 
 export default {
 	init(app: Express) {

@@ -16,7 +16,7 @@ interface ShiftsViewProps {
 export function ShiftsView({ user, setUser }: ShiftsViewProps): React.ReactElement {
     const entryTypeToggler = useToggle(true)
     const entryType: EntryType = React.useMemo(() => entryTypeToggler.active ? 'checkin' : 'checkout', [entryTypeToggler.active])
-    
+
     const currentShift: Shift = React.useMemo(() => user.shifts.find(shift => !shift.checkout), [user])
 
     function startShift(): void {

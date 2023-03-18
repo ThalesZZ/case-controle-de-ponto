@@ -5,7 +5,7 @@ interface ActionButtonProps {
     onClick: React.MouseEventHandler | undefined
 }
 
-export function ActionButton({text, onClick}: ActionButtonProps): React.ReactElement {
+export function ActionButton({ text, onClick }: ActionButtonProps): React.ReactElement {
     return <StyledButton onClick={onClick} >{text}</StyledButton>
 }
 

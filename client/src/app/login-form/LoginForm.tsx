@@ -9,7 +9,7 @@ interface LoginFormProps {
     setLoggedUser: React.Dispatch<React.SetStateAction<User>>
 }
 
-export function LoginForm({setLoggedUser}: LoginFormProps): React.ReactElement {
+export function LoginForm({ setLoggedUser }: LoginFormProps): React.ReactElement {
     const [authCod, setAuthCod] = React.useState<string>('')
 
     function login(): void {

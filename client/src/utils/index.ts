@@ -7,7 +7,7 @@ export function getFormattedTimer(hours: number, minutes: number): string {
 	return `${padTimeValue(hours)}h ${padTimeValue(minutes)}m`;
 }
 
-export function getFormattedDateTime(value: Date): [string, string]{
+export function getFormattedDateTime(value: Date): [string, string] {
 	const datetime = moment(value);
 	const formattedDate = datetime.format("DD/MM/YY");
 	const formattedTime = getFormattedTimer(datetime.hour(), datetime.minute());
