@@ -2,9 +2,9 @@ import React from "react";
 import styled, { css } from 'styled-components';
 import { EntryType, Shift } from "../../../../src/models/Shift";
 import { User } from "../../../../src/models/User";
-import { API } from "../../api/api";
 import { ActionButton } from "../../components/ActionButton";
-import { useToggle } from "../../hooks/useToggle";
+import { API } from "../../services/api/api";
+import { useToggle } from "../../services/hooks/useToggle";
 import { CurrentShiftView } from "./CurrentShiftView";
 import { HistoryView } from "./HistoryView";
 

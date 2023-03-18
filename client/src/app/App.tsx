@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { User } from '../../../src/models/User';
-import DefaultTheme from '../theme/default';
+import DefaultTheme from '../services/theme/default';
 import { LoginForm } from './login-form/LoginForm';
 import { ShiftsView } from './shifts-view/ShiftsView';
 

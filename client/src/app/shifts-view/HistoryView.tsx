@@ -1,7 +1,7 @@
 import React from "react"
 import styled, { css } from 'styled-components'
 import { EntryType, Shift } from "../../../../src/models/Shift"
-import { getFormattedDateTime } from '../../utils'
+import { getFormattedDateTime } from '../../services/utils'
 
 interface HistoryProps {
     shifts: Array<Shift>

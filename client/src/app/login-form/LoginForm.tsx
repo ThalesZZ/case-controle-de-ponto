@@ -1,9 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { User } from '../../../../src/models/User';
-import { API } from '../../api/api';
 import { ActionButton } from '../../components/ActionButton';
 import { TextInput } from "../../components/TextInput";
+import { API } from '../../services/api/api';
 
 interface LoginFormProps {
     setLoggedUser: React.Dispatch<React.SetStateAction<User>>

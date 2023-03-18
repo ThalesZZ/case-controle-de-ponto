@@ -3,8 +3,8 @@ import moment from "moment";
 import React from "react";
 import styled, { css } from 'styled-components';
 import { Shift } from "../../../../src/models/Shift";
-import { useContinuous } from "../../hooks/useContinuous";
-import { getFormattedTimer } from "../../utils";
+import { useContinuous } from "../../services/hooks/useContinuous";
+import { getFormattedTimer } from "../../services/utils";
 
 interface CurrentShiftViewProps {
     currentShift: Shift

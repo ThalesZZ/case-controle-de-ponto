@@ -1,4 +1,4 @@
-import { User } from "../../../src/models/User";
+import { User } from "../../../../src/models/User";
 
 const path = (endpoint: string) => `http://localhost:8000/${endpoint}`;
 
