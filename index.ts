@@ -1,5 +1,6 @@
 import cors from "cors";
 import express from "express";
+import UserController from './src/controllers/UserController';
 
 const port = 8000;
 
@@ -15,3 +16,5 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
 	console.log(`Running server on port ${port}`);
 });
+
+UserController.init(app);
