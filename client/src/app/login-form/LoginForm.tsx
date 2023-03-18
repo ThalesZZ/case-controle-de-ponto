@@ -10,6 +10,5 @@ export function LoginForm(): React.ReactElement {
 }
 
 const Container = styled.div`
-    border: 1px solid red;
     width: 28%;
 `
