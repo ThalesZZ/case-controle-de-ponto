@@ -1,7 +1,9 @@
 const theme = {
-    bgColor: '#151F2B',
-    bgInput: '#1E2733',
-    pxSize: 16
+    primary: '#151F2B',
+    auxiliar: '#1E2733',
+    inputTextColor: '#FFFFFF',
+    pxSize: 16,
+    boxRadius: 4
 }
 
 export default theme

@@ -1,6 +1,6 @@
 import { ThemeProvider } from 'styled-components';
-import { TextInput } from "../components/text-input";
 import DefaultTheme from '../theme/default';
+import { LoginForm } from './login-form/LoginForm';
 
 const App = () => {
 
@@ -20,9 +20,11 @@ const App = () => {
   // }, [])
 
   return (
-    <ThemeProvider theme={DefaultTheme}>
-      <TextInput />
-    </ThemeProvider>
+    <div id="app">
+      <ThemeProvider theme={DefaultTheme}>
+        <LoginForm />
+      </ThemeProvider>
+    </div>
   );
 };
 
