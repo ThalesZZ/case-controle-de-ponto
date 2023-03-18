@@ -1,9 +1,12 @@
 import React from "react";
 import styled, { css } from 'styled-components';
 
-export function TextInput(): React.ReactElement {
-    const [value, setValue] = React.useState<string>('')
+interface TextInputProps {
+    value: string
+    setValue: React.Dispatch<React.SetStateAction<string>>
+}
 
+export function TextInput({value, setValue}: TextInputProps): React.ReactElement {
     return (
         <Container className="text-input" label="Código do usuário">
             <StyledInput value={value} onChange={e => setValue(e.target.value)} />
