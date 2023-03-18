@@ -1,7 +1,5 @@
 import { Express } from "express";
-import { User } from "../models/User";
-
-const users: Array<User> = [{ id: 1, authCod: "abc123" }];
+import users from '../persistence/users';
 
 export default {
 	init(app: Express) {
