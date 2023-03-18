@@ -15,6 +15,10 @@ export function HistoryView({ shifts, entryType }: HistoryProps): React.ReactEle
             <div id="entries">
                 {shifts
                     .filter(shift => !!shift.checkin && !!shift.checkout)
+                    .sort((shift1, shift2) => {
+                        console.log(shift1, shift2)
+                        return shift2[entryType]?.getTime() - shift1[entryType]?.getTime()
+                    })
                     .map(shift => {
                         const [formattedDate, formattedTime] = getFormattedDateTime(shift[entryType])
 
