@@ -8,6 +8,9 @@ export function LoginForm(): React.ReactElement {
 
     return (
         <Container>
+            <div id="login-header">
+                Ponto <span>Ilumeo</span>
+            </div>
             <TextInput value={authCod} setValue={setAuthCod} />
             <ActionButton text="Confirmar" onClick={undefined} />
         </Container>
@@ -19,5 +22,18 @@ const Container = styled.div`
         width: 28%;
         flex-flow: column;
         gap: 1.5em;
+
+        #login-header {
+            font-size: 1.3em;
+            font-weight: 400;
+            color: #CFCFCF;
+            margin-bottom: 1em;
+
+            span {
+                font-size: 1.05em;
+                margin-left: 5px;
+                font-weight: 700;
+            }
+        }
     `}
 `
