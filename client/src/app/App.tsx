@@ -1,7 +1,8 @@
+import { TextInput } from "../components/text-input";
 
 const App = () => {
 
-
+  
 
   // React.useEffect(() => {
   //   fetch('http://localhost:8000/login', {
@@ -17,7 +18,9 @@ const App = () => {
   // }, [])
 
   return (
-    <div>test</div>
+    <div style={{border: '1px solid red'}}>
+      <TextInput />
+    </div>
   );
 };
 
