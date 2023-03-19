@@ -15,7 +15,7 @@ interface CurrentShiftViewProps {
 const refreshIntervalMs = 60000
 
 export function CurrentShiftView({ currentShift, startShift, stopShift }: CurrentShiftViewProps): React.ReactElement {
-    const shiftStarted = !!currentShift?.checkin
+    const shiftStarted = !!currentShift
 
     const [shiftTimer, setShiftTimer] = React.useState<string>('')
 
