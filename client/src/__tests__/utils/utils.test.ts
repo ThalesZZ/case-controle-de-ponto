@@ -3,7 +3,7 @@ import {
 	getFormattedDateTime,
 	getFormattedTime,
 	padTimeValue
-} from "../services/utils";
+} from "../../services/utils";
 
 describe("date/time formatting funtions", () => {
 	test("time value padding", () => {
