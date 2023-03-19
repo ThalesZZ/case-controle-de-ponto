@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import React from 'react'
 import { ActionButton } from '../../components/ActionButton'
 
-describe('action button', () => {
+describe('action button component', () => {
     const buttonAction = jest.fn()
     const { baseElement } = render(
         <ActionButton
