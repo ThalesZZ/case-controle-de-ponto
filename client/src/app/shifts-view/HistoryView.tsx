@@ -9,14 +9,21 @@ interface HistoryProps {
 }
 
 export function HistoryView({ shifts, entryType }: HistoryProps): React.ReactElement {
+    const finishedShifts = React.useMemo(
+        () => shifts
+            .filter(shift => !!shift.checkin && !!shift.checkout)
+            .sort((shift1, shift2) => shift2[entryType]?.getTime() - shift1[entryType]?.getTime()),
+        [shifts, entryType]
+    )
+    
+    const hasEntries = React.useMemo(() => finishedShifts.length > 0, [finishedShifts])
+
     return (
         <Container>
             <label>Dias anteriores</label>
             <div id="entries">
-                {shifts
-                    .filter(shift => !!shift.checkin && !!shift.checkout)
-                    .sort((shift1, shift2) => shift2[entryType]?.getTime() - shift1[entryType]?.getTime())
-                    .map(shift => {
+                {hasEntries ? (
+                    finishedShifts.map(shift => {
                         const [formattedDate, formattedTime] = getFormattedDateTime(shift[entryType])
 
                         return (
@@ -25,7 +32,10 @@ export function HistoryView({ shifts, entryType }: HistoryProps): React.ReactEle
                                 <span>{formattedTime}</span>
                             </div>
                         )
-                    })}
+                    })
+                ) : (
+                    <div className="entry">Nenhum registro até o momento</div>
+                )}
             </div>
         </Container>
     )
