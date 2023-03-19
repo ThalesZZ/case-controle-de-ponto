@@ -10,14 +10,23 @@ interface LoginFormProps {
 }
 
 export function LoginForm({ setLoggedUser }: LoginFormProps): React.ReactElement {
-    const [authCod, setAuthCod] = React.useState<string>('')
+    const [authCod, setAuthCod] = React.useState('')
+
+    const [errorMessage, setErrorMessage] = React.useState('')
+    const hideErrorMessage = () => setErrorMessage('')
+    React.useEffect(hideErrorMessage, [authCod])
 
     function login(): void {
-        API.login(authCod).then(setLoggedUser)
+        if (!authCod) return setErrorMessage('Informe seu código de usuário')
+
+        API.login(authCod)
+            .then(setLoggedUser)
+            .catch((res: Response) => res.text().then(setErrorMessage))
     }
 
     return (
         <Container>
+            {errorMessage && <div id="error-box">{errorMessage}</div>}
             <div id="login-header">
                 Ponto <span>Ilumeo</span>
             </div>
@@ -32,6 +41,18 @@ const Container = styled.div`
         width: 28%;
         flex-flow: column;
         gap: 1.5em;
+
+        #error-box {
+            position: absolute;
+            left: 50%;
+            top: 20%;
+            transform: translateX(-50%);
+            padding: 1em 1.5em;
+            background-color: ${theme.danger};
+            font-weight: 700;
+            color: ${theme.auxiliar};
+            border-radius: ${theme.boxRadius}px;
+        }
 
         #login-header {
             font-size: 1.3em;
