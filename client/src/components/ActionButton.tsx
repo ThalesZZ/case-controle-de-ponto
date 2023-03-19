@@ -6,7 +6,7 @@ interface ActionButtonProps {
 }
 
 export function ActionButton({ text, onClick }: ActionButtonProps): React.ReactElement {
-    return <StyledButton onClick={onClick} >{text}</StyledButton>
+    return <StyledButton onClick={onClick} data-testid="test-actionbutton">{text}</StyledButton>
 }
 
 const StyledButton = styled.button`

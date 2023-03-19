@@ -4,7 +4,7 @@ import React from "react";
 import styled, { css } from 'styled-components';
 import { Shift } from "../../../../src/models/Shift";
 import { useContinuous } from "../../services/hooks/useContinuous";
-import { getFormattedTimer } from "../../services/utils";
+import { getFormattedTime } from "../../services/utils";
 
 interface CurrentShiftViewProps {
     currentShift: Shift
@@ -15,33 +15,33 @@ interface CurrentShiftViewProps {
 const refreshIntervalMs = 60000
 
 export function CurrentShiftView({ currentShift, startShift, stopShift }: CurrentShiftViewProps): React.ReactElement {
-    const shiftStarted = !!currentShift?.checkin
+    const shiftStarted = !!currentShift
 
     const [shiftTimer, setShiftTimer] = React.useState<string>('')
 
     useContinuous(refreshIntervalMs, () => {
         if (!currentShift)
-            return setShiftTimer(getFormattedTimer(0, 0))
+            return setShiftTimer(getFormattedTime(0, 0))
 
         const now = moment(new Date())
         const minutesSinceCheckin = now.diff(currentShift.checkin, 'minutes')
         const hours = Math.floor(minutesSinceCheckin / 60)
         const minutes = minutesSinceCheckin % 60
 
-        setShiftTimer(getFormattedTimer(hours, minutes))
+        setShiftTimer(getFormattedTime(hours, minutes))
     }, [currentShift])
 
     return (
-        <Container shiftStarted={shiftStarted}>
+        <Container shiftStarted={shiftStarted} data-testid="test-current-shift-view">
             <div id="timer">
                 <span>{shiftTimer}</span>
                 <label>Horas de hoje</label>
             </div>
 
             {!shiftStarted ? (
-                <button onClick={startShift}>Iniciar turno</button>
+                <button onClick={startShift} data-testid="test-shift-button-start">Iniciar turno</button>
             ) : (
-                <button onClick={stopShift}>Finalizar turno</button>
+                <button onClick={stopShift} data-testid="test-shift-button-stop">Finalizar turno</button>
             )}
         </Container>
     )
