@@ -32,16 +32,16 @@ export function CurrentShiftView({ currentShift, startShift, stopShift }: Curren
     }, [currentShift])
 
     return (
-        <Container shiftStarted={shiftStarted}>
+        <Container shiftStarted={shiftStarted} data-testid="test-current-shift-view">
             <div id="timer">
                 <span>{shiftTimer}</span>
                 <label>Horas de hoje</label>
             </div>
 
             {!shiftStarted ? (
-                <button onClick={startShift}>Iniciar turno</button>
+                <button onClick={startShift} data-testid="test-shift-button-start">Iniciar turno</button>
             ) : (
-                <button onClick={stopShift}>Finalizar turno</button>
+                <button onClick={stopShift} data-testid="test-shift-button-stop">Finalizar turno</button>
             )}
         </Container>
     )

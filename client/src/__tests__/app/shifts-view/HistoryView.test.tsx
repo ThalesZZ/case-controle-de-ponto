@@ -1,6 +1,5 @@
 import { describe, expect, test } from '@jest/globals'
 import { render, screen } from '@testing-library/react'
-import React from 'react'
 import { HistoryView } from '../../../app/shifts-view/HistoryView'
 
 describe('history view component', () => {
