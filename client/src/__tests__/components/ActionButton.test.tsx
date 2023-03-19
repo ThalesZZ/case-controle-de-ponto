@@ -1,18 +1,18 @@
-import { describe, expect, jest, test } from '@jest/globals'
-import { render } from '@testing-library/react'
-import React from 'react'
+import { describe, expect, test } from '@jest/globals'
+import { render, screen } from '@testing-library/react'
 import { ActionButton } from '../../components/ActionButton'
 
 describe('action button component', () => {
     const buttonAction = jest.fn()
-    const { baseElement } = render(
+    render(
         <ActionButton
             text={"buttonText"}
             onClick={buttonAction}
         />
     )
+    const button = screen.getByTestId('test-actionbutton')
 
     test('text render', () => {
-        expect(baseElement.textContent).toBe("buttonText")
+        expect(button.textContent).toBe("buttonText")
     })
 })
