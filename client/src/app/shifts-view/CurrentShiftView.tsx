@@ -4,7 +4,7 @@ import React from "react";
 import styled, { css } from 'styled-components';
 import { Shift } from "../../../../src/models/Shift";
 import { useContinuous } from "../../services/hooks/useContinuous";
-import { getFormattedTimer } from "../../services/utils";
+import { getFormattedTime } from "../../services/utils";
 
 interface CurrentShiftViewProps {
     currentShift: Shift
@@ -21,14 +21,14 @@ export function CurrentShiftView({ currentShift, startShift, stopShift }: Curren
 
     useContinuous(refreshIntervalMs, () => {
         if (!currentShift)
-            return setShiftTimer(getFormattedTimer(0, 0))
+            return setShiftTimer(getFormattedTime(0, 0))
 
         const now = moment(new Date())
         const minutesSinceCheckin = now.diff(currentShift.checkin, 'minutes')
         const hours = Math.floor(minutesSinceCheckin / 60)
         const minutes = minutesSinceCheckin % 60
 
-        setShiftTimer(getFormattedTimer(hours, minutes))
+        setShiftTimer(getFormattedTime(hours, minutes))
     }, [currentShift])
 
     return (
