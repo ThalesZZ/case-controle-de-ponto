@@ -1,5 +1,6 @@
 import cors from "cors";
 import express from "express";
+import { UserController } from "./prisma/controllers/UserController";
 import router from "./src/routes";
 
 const port = 8000;
@@ -17,3 +18,6 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
 	console.log(`Running on port ${port}`);
 });
+
+const usercontroller = new UserController();
+// usercontroller.create("LOL");
