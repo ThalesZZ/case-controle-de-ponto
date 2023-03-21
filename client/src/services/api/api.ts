@@ -28,11 +28,11 @@ export const API = {
 			})
 			.then(Mappers.user);
 	},
-	async stopShift(userId: string, shiftId: string): Promise<User> {
+	async stopShift(userId: string): Promise<User> {
 		return await fetch(path("stop-shift"), {
 			method: "POST",
 			headers: { "Content-type": "application/json" },
-			body: JSON.stringify({ userId, shiftId }),
+			body: JSON.stringify({ userId }),
 		})
 			.then((res) => {
 				if (res.status === 200) return res.json();

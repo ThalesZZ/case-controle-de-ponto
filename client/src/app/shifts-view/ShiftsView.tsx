@@ -24,7 +24,7 @@ export function ShiftsView({ user, setUser }: ShiftsViewProps): React.ReactEleme
     }
 
     function stopShift(): void {
-        API.stopShift(user.id, currentShift.id).then(setUser)
+        API.stopShift(user.id).then(setUser)
     }
 
     return (

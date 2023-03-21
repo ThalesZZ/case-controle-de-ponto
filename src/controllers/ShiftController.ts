@@ -9,7 +9,7 @@ export class ShiftController {
 		const { userId } = req.body;
 
 		const user = users.find((user) => user.id === userId);
-		if (!user) return res.status(404).send("User not found");
+		if (!user) return res.status(404).send("Usuário não encontrado");
 
 		const now = new Date();
 		const shift: Shift = { id: randomUUID(), checkin: now };
@@ -19,13 +19,13 @@ export class ShiftController {
 	}
 
 	async stop(req: Request, res: Response) {
-		const { userId, shiftId } = req.body;
+		const { userId } = req.body;
 
 		const user = users.find((user) => user.id === userId);
-		if (!user) return res.status(404).send("User not found");
+		if (!user) return res.status(404).send("Usuário não encontrado");
 
-		const shift = user.shifts.find((shift) => shift.id === shiftId);
-		if (!shift) return res.status(404).send("Shift not found");
+		const shift = user.shifts.find((shift) => !shift.checkout);
+		if (!shift) return res.status(404).send("Turno não encontrado");
 
 		const now = new Date();
 		shift.checkout = now;

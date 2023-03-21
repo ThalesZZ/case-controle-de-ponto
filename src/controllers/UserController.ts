@@ -9,6 +9,6 @@ export class UserController {
 
 		return user
 			? res.status(200).json(user)
-			: res.status(404).send("User not found");
+			: res.status(404).send("Usuário não encontrado");
 	}
 }
