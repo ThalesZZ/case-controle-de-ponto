@@ -2,30 +2,31 @@ import { Shift } from "../../../../src/models/Shift";
 import { User } from "../../../../src/models/User";
 
 const path = (endpoint: string) => `http://localhost:8000/${endpoint}`;
+const resolveResponse = (res: Response) => {
+	if (res.status === 200) return res.json();
+	else throw res;
+};
+
+const headers: HeadersInit = { "Content-type": "application/json" };
 
 export const API = {
-	async login(authCod: string): Promise<User> {
-		return fetch(path("login"), {
-			method: "POST",
-			headers: { "Content-type": "application/json" },
-			body: JSON.stringify({ authCod }),
-		})
-			.then((res) => {
-				if (res.status === 200) return res.json();
-				else throw res;
+	user: {
+		async get(authCod: string): Promise<User> {
+			return fetch(path(`user/${authCod}`), {
+				headers,
+				method: "GET",
 			})
-			.then(Mappers.user);
+				.then(resolveResponse)
+				.then(Mappers.user);
+		},
 	},
 	async startShift(userId: string): Promise<User> {
 		return fetch(path("start-shift"), {
+			headers,
 			method: "POST",
-			headers: { "Content-type": "application/json" },
 			body: JSON.stringify({ userId }),
 		})
-			.then((res) => {
-				if (res.status === 200) return res.json();
-				else throw res;
-			})
+			.then(resolveResponse)
 			.then(Mappers.user);
 	},
 	async stopShift(userId: string): Promise<User> {
@@ -34,10 +35,7 @@ export const API = {
 			headers: { "Content-type": "application/json" },
 			body: JSON.stringify({ userId }),
 		})
-			.then((res) => {
-				if (res.status === 200) return res.json();
-				else throw res;
-			})
+			.then(resolveResponse)
 			.then(Mappers.user);
 	},
 };

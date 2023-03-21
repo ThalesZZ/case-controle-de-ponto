@@ -19,7 +19,8 @@ export function LoginForm({ setLoggedUser }: LoginFormProps): React.ReactElement
     function login(): void {
         if (!authCod) return setErrorMessage('Informe seu código de usuário')
 
-        API.login(authCod)
+        API.user
+            .get(authCod)
             .then(setLoggedUser)
             .catch((res: Response) => res.text().then(setErrorMessage))
     }

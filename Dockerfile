@@ -14,4 +14,6 @@ EXPOSE 8000
 
 RUN npx tsc
 
+RUN yarn prisma generate
+
 CMD [ "node", "dist/index.js" ]
